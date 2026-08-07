@@ -12,6 +12,43 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <div class="custom-cursor" id="custom-cursor"></div>
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+
+    <div class="main">
+      <div class="app-header">
+        <span class="badge"
+          ><i class="ri-restaurant-2-fill"></i> Recipe Finder</span
+        >
+        <h1 class="app-title">
+          What are we <span class="highlight">cooking</span> today?
+        </h1>
+        <p class="app-subtitle">Discover recipes that match your cravings</p>
+      </div>
+
+      <div class="search-sec">
+        <div class="search-box">
+          <i class="ri-search-line search-icon"></i>
+          <input
+            type="text"
+            id="search-input"
+            placeholder="Search for pasta, salad, dessert..."
+          />
+        </div>
+
+        <div class="category-filters" id="category-filters"></div>
+      </div>
+
+      <div class="results-info" id="results-info"></div>
+
+      <div class="recipe-grid" id="recipe-grid"></div>
+
+      <div class="no-results" id="no-results">
+        <i class="ri-emotion-sad-line"></i>
+        <p>No recipes found. Try a different search or category.</p>
+      </div>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>
