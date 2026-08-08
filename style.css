@@ -230,14 +230,18 @@ body {
   box-shadow: var(--shadow);
   transition:
     transform 0.25s ease,
+    border-color 0.5s ease,
     box-shadow 0.25s ease;
   animation: cardEnter 0.4s ease backwards;
+    border: 2px solid transparent;
 }
 
 .recipe-card:hover {
   transform: translateY(-8px) scale(1.02);
   box-shadow: 0 16px 32px rgba(255, 107, 53, 0.18);
+  border-color: var(--accent);
 }
+
 
 @keyframes cardEnter {
   from {

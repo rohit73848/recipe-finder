@@ -45,7 +45,7 @@ const recipes = [
         id: 5,
         title: 'Masala Dosa',
         category: 'Breakfast',
-        image: 'https://images.unsplash.com/photo-1630383249896-483dbb3f9c9c?auto=format&fit=crop&w=500&q=60',
+        image: 'https://images.unsplash.com/photo-1694849789325-914b71ab4075?q=80&w=774&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         time: '30 mins',
         ingredients: ['Dosa Batter', '3 Potatoes', '1 Onion', 'Mustard Seeds', 'Curry Leaves', 'Turmeric'],
         instructions: 'আলু সেদ্ধ করে মাখুন। কড়াইয়ে সরষে ও কারিপাতা ফোড়ন দিয়ে পেঁয়াজ ভেজে আলু মিশিয়ে মশলা দিন। তাওয়ায় দোসার ব্যাটার পাতলা করে ছড়িয়ে ভেতরে আলুর পুর দিয়ে মুড়ে পরিবেশন করুন।'
@@ -63,7 +63,7 @@ const recipes = [
         id: 7,
         title: 'Gulab Jamun',
         category: 'Dessert',
-        image: 'https://images.unsplash.com/photo-1601303516361-42d7ec1f4b4c?auto=format&fit=crop&w=500&q=60',
+        image: 'https://images.pexels.com/photos/6896577/pexels-photo-6896577.jpeg',
         time: '35 mins',
         ingredients: ['1 cup Khoya', '2 tbsp Flour', '2 cups Sugar', 'Cardamom', 'Ghee for frying'],
         instructions: 'খোয়া ও ময়দা মেখে ছোট ছোট বল বানান। চিনি ও এলাচ দিয়ে সিরা তৈরি করুন। ঘিয়ে বলগুলো সোনালি করে ভেজে গরম সিরায় ডুবিয়ে রাখুন কিছুক্ষণ।'
@@ -186,3 +186,24 @@ const recipes = [
         instructions: 'ময়দা মেখে পাতলা লেচি বেলে নিন। পুরের উপকরণ মিশিয়ে লেচির মাঝে ভরে মোমোর আকারে গড়ে নিন। ভাপে ১০-১২ মিনিট সেদ্ধ করে চাটনির সাথে গরম গরম পরিবেশন করুন।'
     }
 ];
+
+let recipeGridContainer = document.getElementById("recipe-grid")
+
+function displayRecipes(recipesData){
+recipeGridContainer.innerHTML =  recipesData.map((recipe)=>{
+    return `<div class="recipe-card" onclick="openModal(${recipe.id})">
+    <div class="recipe-img-wrap">
+        <img src="${recipe.image}" alt="${recipe.title}">
+        <button class="favorite-btn"><i class="ri-heart-3-line"></i></button>
+    </div>
+    <div class="recipe-info">
+        <h3 class="recipe-name">${recipe.title}</h3>
+        <div class="recipe-meta">
+            <span class="recipe-category-tag">${recipe.category}</span>
+            <span class="recipe-time"><i class="ri-time-line"></i> ${recipe.time}</span>
+        </div>
+    </div>
+</div>`
+  }).join("")
+}
+displayRecipes(recipes)
