@@ -49,6 +49,38 @@
         <p>No recipes found. Try a different search or category.</p>
       </div>
     </div>
+    <!-- Recipe Details Modal -->
+<div class="modal-overlay" id="recipe-modal">
+  <div class="modal-content">
+    <button class="close-btn" id="close-modal"><i class="ri-close-line"></i></button>
+    
+    <div class="modal-img-wrap">
+      <img src="https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?q=80&w=888&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Recipe Image" id="modal-img" />
+    </div>
+    
+    <div class="modal-body">
+      <div class="modal-header">
+        <h2 id="modal-title" class="modal-title">Recipe Name</h2>
+        <div class="recipe-meta">
+          <span class="recipe-category-tag" id="modal-category">Category</span>
+          <span class="recipe-time" id="modal-time"><i class="ri-time-line"></i> 00 mins</span>
+        </div>
+      </div>
+      
+      <div class="modal-section">
+        <h3>Ingredients</h3>
+        <ul id="modal-ingredients" class="ingredients-list">
+
+        </ul>
+      </div>
+      
+      <div class="modal-section">
+        <h3>Instructions</h3>
+        <p id="modal-instructions" class="instructions-text">Instructions will go here...</p>
+      </div>
+    </div>
+  </div>
+</div>
     <script src="script.js"></script>
   </body>
 </html>
