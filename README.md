@@ -5,7 +5,7 @@ A dynamic, front-end web application that helps users discover and filter recipe
 Unlike my previous projects that had a dark/professional theme, I went with a warm, light "food-app" aesthetic for this one (cream background, coral accents, and a custom glowing cursor).
 
 ## 🚀 Live Demo
-[Recepi Finder](https://rohit73848.github.io/recipe-finder/)]
+[Recepi Finder](https://rohit73848.github.io/recipe-finder/)
 
 ## ✨ Features
 * **Live Search:** Type a recipe name or keyword, and the grid updates instantly.
