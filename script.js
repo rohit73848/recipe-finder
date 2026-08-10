@@ -202,8 +202,17 @@ const modalCategory = document.getElementById('modal-category');
 const modalTime = document.getElementById('modal-time');
 const modalIngredients = document.getElementById('modal-ingredients');
 const modalInstructions = document.getElementById('modal-instructions');
+const noResults = document.getElementById('no-results');
 
 function displayRecipes(recipesData){
+if(recipesData.length === 0){
+    noResults.style.display = 'block';
+    recipeGridContainer.innerHTML = '';
+    return;
+}
+else{
+    noResults.style.display = 'none';
+}
 recipeGridContainer.innerHTML =  recipesData.map((recipe)=>{
     return `<div class="recipe-card" onclick="openModal(${recipe.id})">
     <div class="recipe-img-wrap">
