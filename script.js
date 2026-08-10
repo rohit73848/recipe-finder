@@ -190,6 +190,7 @@ document.addEventListener("mousemove", (e) => {
 
 let currentCategory = 'All';
 let currentSearchTerm = '';
+let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
 let recipeGridContainer = document.getElementById("recipe-grid")
 
@@ -205,29 +206,33 @@ const modalInstructions = document.getElementById('modal-instructions');
 const noResults = document.getElementById('no-results');
 
 function displayRecipes(recipesData){
-if(recipesData.length === 0){
-    noResults.style.display = 'block';
-    recipeGridContainer.innerHTML = '';
-    return;
-}
-else{
-    noResults.style.display = 'none';
-}
-recipeGridContainer.innerHTML =  recipesData.map((recipe)=>{
-    return `<div class="recipe-card" onclick="openModal(${recipe.id})">
-    <div class="recipe-img-wrap">
-        <img src="${recipe.image}" alt="${recipe.title}">
-        <button class="favorite-btn"><i class="ri-heart-3-line"></i></button>
-    </div>
-    <div class="recipe-info">
-        <h3 class="recipe-name">${recipe.title}</h3>
-        <div class="recipe-meta">
-            <span class="recipe-category-tag">${recipe.category}</span>
-            <span class="recipe-time"><i class="ri-time-line"></i> ${recipe.time}</span>
+    if(recipesData.length === 0){
+        noResults.style.display = 'block';
+        recipeGridContainer.innerHTML = '';
+        return;
+    } else {
+        noResults.style.display = 'none';
+    }
+    
+    recipeGridContainer.innerHTML = recipesData.map((recipe) => {
+        let isFav = favorites.includes(recipe.id); 
+        
+        return `<div class="recipe-card" data-id="${recipe.id}">
+        <div class="recipe-img-wrap">
+            <img src="${recipe.image}" alt="${recipe.title}">
+            <button class="favorite-btn ${isFav ? 'favorited' : ''}">
+                <i class="${isFav ? 'ri-heart-3-fill' : 'ri-heart-3-line'}"></i>
+            </button>
         </div>
-    </div>
-</div>`
-  }).join("")
+        <div class="recipe-info">
+            <h3 class="recipe-name">${recipe.title}</h3>
+            <div class="recipe-meta">
+                <span class="recipe-category-tag">${recipe.category}</span>
+                <span class="recipe-time"><i class="ri-time-line"></i> ${recipe.time}</span>
+            </div>
+        </div>
+    </div>`
+    }).join("");
 }
 
 function openModal(id) {
@@ -285,6 +290,27 @@ function filterRecipes(){
     }
     displayRecipes(filtered);
 }
+recipeGridContainer.addEventListener('click', (e) => {
+    const favoriteBtn = e.target.closest('.favorite-btn');
+    const recipeCard = e.target.closest('.recipe-card');
 
+    if (recipeCard) {
+        const clickedId = Number(recipeCard.getAttribute('data-id')); 
+
+        if (favoriteBtn) {
+            if (favorites.includes(clickedId)) {
+                favorites = favorites.filter(id => id !== clickedId);
+            } else {
+                favorites.push(clickedId);
+            }
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            filterRecipes(); 
+        } 
+        else {
+            openModal(clickedId);
+        }
+    }
+});
 displayRecipes(recipes);
 renderCategoryButtons();
