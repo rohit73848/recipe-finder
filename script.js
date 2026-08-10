@@ -246,4 +246,27 @@ closeBtn.addEventListener('click', () => {
 
     displayRecipes(filteredRecipes);
 });
+
+// Category filter Buttons add
+
+let categoryFilters = document.getElementById('category-filters');
+const categories = ['All', 'Breakfast', 'Lunch', 'Dinner', 'Dessert', 'Snacks'];
+
+function renderCategoryButtons(){
+    categoryFilters.innerHTML = categories.map((category)=>{
+       return `<button class="category-btn" onclick="filterByCategory('${category}')">${category}</button>`
+    }).join("");
+}
+
+function filterByCategory(category){
+    let filteredRecipes;
+    if(category === 'All'){
+        filteredRecipes = recipes;
+    } else {
+        filteredRecipes = recipes.filter((recipe) => recipe.category === category);
+    }
+    displayRecipes(filteredRecipes);
+}
+
 displayRecipes(recipes);
+renderCategoryButtons();
