@@ -236,4 +236,14 @@ closeBtn.addEventListener('click', () => {
     modalOverlay.style.display = 'none';
 });
 
-displayRecipes(recipes)
+// Search functionality
+ let searchInput = document.getElementById('search-input');
+ searchInput.addEventListener('input', (e) => {
+    const searchTerm = e.target.value.toLowerCase();
+    const filteredRecipes = recipes.filter((recipe) => {
+        return recipe.title.toLowerCase().includes(searchTerm) || recipe.category.toLowerCase().includes(searchTerm);
+    });
+
+    displayRecipes(filteredRecipes);
+});
+displayRecipes(recipes);
