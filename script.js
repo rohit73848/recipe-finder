@@ -1,9 +1,3 @@
-let cursor = document.getElementById("custom-cursor");
-
-document.addEventListener("mousemove", (e) => {
-  cursor.style.left = e.clientX + "px";
-  cursor.style.top = e.clientY + "px";
-});
 const recipes = [
     {
         id: 1,
@@ -187,7 +181,23 @@ const recipes = [
     }
 ];
 
+let cursor = document.getElementById("custom-cursor");
+
+document.addEventListener("mousemove", (e) => {
+  cursor.style.left = e.clientX + "px";
+  cursor.style.top = e.clientY + "px";
+});
 let recipeGridContainer = document.getElementById("recipe-grid")
+
+
+const modalOverlay = document.getElementById('recipe-modal');
+const closeBtn = document.getElementById('close-modal');
+const modalImg = document.getElementById('modal-img');
+const modalTitle = document.getElementById('modal-title');
+const modalCategory = document.getElementById('modal-category');
+const modalTime = document.getElementById('modal-time');
+const modalIngredients = document.getElementById('modal-ingredients');
+const modalInstructions = document.getElementById('modal-instructions');
 
 function displayRecipes(recipesData){
 recipeGridContainer.innerHTML =  recipesData.map((recipe)=>{
@@ -206,4 +216,24 @@ recipeGridContainer.innerHTML =  recipesData.map((recipe)=>{
 </div>`
   }).join("")
 }
+
+function openModal(id) {
+    const clickedRecipe = recipes.find((recipe) => recipe.id === id);
+
+    modalTitle.innerText = clickedRecipe.title;
+    modalImg.src = clickedRecipe.image;
+    modalCategory.innerText = clickedRecipe.category;
+    modalTime.innerText = clickedRecipe.time;
+    modalInstructions.innerText = clickedRecipe.instructions;
+
+    modalIngredients.innerHTML = clickedRecipe.ingredients.map((item) => {
+        return `<li>${item}</li>`;
+    }).join("");
+
+    modalOverlay.style.display = 'flex';
+}
+closeBtn.addEventListener('click', () => {
+    modalOverlay.style.display = 'none';
+});
+
 displayRecipes(recipes)
