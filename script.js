@@ -93,7 +93,7 @@ const recipes = [
         id: 11,
         title: 'Fish Fry',
         category: 'Lunch',
-        image: 'https://images.unsplash.com/photo-1544943910-4c1dc44aab44?auto=format&fit=crop&w=500&q=60',
+        image: 'https://images.unsplash.com/photo-1656389863341-1dfd38ee6edc?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
         time: '20 mins',
         ingredients: ['4 pcs Fish', 'Turmeric', 'Red Chilli Powder', 'Lemon juice', 'Mustard Oil', 'Semolina'],
         instructions: 'মাছ ধুয়ে হলুদ, লঙ্কা গুঁড়ো ও লেবুর রস দিয়ে ম্যারিনেট করুন। সুজি মাখিয়ে সরষের তেলে দুই পিঠ মুচমুচে করে ভেজে নিন।'
@@ -187,6 +187,10 @@ document.addEventListener("mousemove", (e) => {
   cursor.style.left = e.clientX + "px";
   cursor.style.top = e.clientY + "px";
 });
+
+let currentCategory = 'All';
+let currentSearchTerm = '';
+
 let recipeGridContainer = document.getElementById("recipe-grid")
 
 
@@ -239,10 +243,8 @@ closeBtn.addEventListener('click', () => {
 // Search functionality
  let searchInput = document.getElementById('search-input');
  searchInput.addEventListener('input', (e) => {
-    const searchTerm = e.target.value.toLowerCase();
-    const filteredRecipes = recipes.filter((recipe) => {
-        return recipe.title.toLowerCase().includes(searchTerm) || recipe.category.toLowerCase().includes(searchTerm);
-    });
+    currentSearchTerm = e.target.value.toLowerCase();
+    filterRecipes();
 
     displayRecipes(filteredRecipes);
 });
@@ -259,13 +261,20 @@ function renderCategoryButtons(){
 }
 
 function filterByCategory(category){
-    let filteredRecipes;
-    if(category === 'All'){
-        filteredRecipes = recipes;
-    } else {
-        filteredRecipes = recipes.filter((recipe) => recipe.category === category);
+     currentCategory = category;
+    filterRecipes();
+
+}
+function filterRecipes(){
+    let filtered = recipes;
+
+    if(currentCategory !== 'All'){
+        filtered = filtered.filter((recipe) => recipe.category === currentCategory);
     }
-    displayRecipes(filteredRecipes);
+    if(currentSearchTerm !== ''){
+        filtered = filtered.filter((recipe) => recipe.title.toLowerCase().includes(currentSearchTerm));
+    }
+    displayRecipes(filtered);
 }
 
 displayRecipes(recipes);
